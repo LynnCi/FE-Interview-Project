@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import '../api/index'
 export default {
   name: 'HelloWorld',
   data () {
