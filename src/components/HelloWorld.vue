@@ -5,7 +5,8 @@
 </template>
 
 <script>
-import '../api/index'
+import '../api/jicheng'
+import '../api/test'
 export default {
   name: 'HelloWorld',
   data () {

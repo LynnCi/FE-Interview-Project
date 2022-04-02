@@ -8,7 +8,6 @@
 function mergeSort(arr){
     if(arr.length < 2) return arr
     let res = []
-    console.log('abc2')
 
     let mid = Math.floor(arr.length / 2)
     let left = arr.slice(0,mid) //slice选择元素 从0开始，到mid结束，但不包括mid
@@ -29,4 +28,3 @@ function mergeSort(arr){
 }
 
 let res2 = mergeSort([3,2,1])
-console.log(res2)

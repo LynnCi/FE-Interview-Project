@@ -64,5 +64,16 @@ for(let i = 0;i < array.length;i++){
         arr11.push(array[i])
     }
 }
-console.log(arr11,'arr11')
 
+/**
+ * new创建对象的过程
+ */
+function Person(name,age){
+    this.pName = name,
+    this.pAge = age,
+    this.eat = function(){
+        console.log('eat apple')
+    }
+}
+var man = new Person('olivia',8)
+console.log('man',man)

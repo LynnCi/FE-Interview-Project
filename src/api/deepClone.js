@@ -17,11 +17,3 @@ function deepClone(obj){
     return res
 }
 
-let obj1 = {
-    name:'joe',
-    age:9
-}
-let obj2 = obj1
-obj2.name = 'olivia'
-console.log('obj1.name',obj1.name)
-console.log('obj2.name',obj2.name)
