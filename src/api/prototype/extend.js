@@ -81,7 +81,7 @@ console.log(child2.read.book,'child2.read') //twwoBook
 */
 
 /**
- * 3、组合继承 = 原型链继承 + 构造函数继承
+ * 3、组合继承（es6 之前用） = 原型链继承 + 构造函数继承
  * 核心点：通过在子类构造函数上让父类构造函数调用call改变this指向；子类构造函数的原型对象指向父类构造函数的实例；
  * 优点：
  *      1、子类实例的属性是私有的，不会共享；
@@ -92,6 +92,7 @@ console.log(child2.read.book,'child2.read') //twwoBook
  *      2、子类实例上的属性，同时存在于原型链上和子例身上，造成原型链污染。
  */
 
+/*
 function Father(name,age){
     this.name = name;
     this.age = age;
@@ -109,3 +110,25 @@ const child2 = new Child('leilei',19)
 
 console.log(child1.getInfo(),'child1.info') //hanmeimei 18
 console.log(child2.getInfo(),'child2.info') // leilei 19
+*/
+
+/**
+ * es6 class继承
+ * class在通过Babel转换成 es5 的时候，用的就是组合继承
+ */
+
+class Person{
+    constructor(name){
+        this.name = name;
+        this.colors = ['red','green']
+    }
+}
+class Child extends Person{
+    constructor(name,age){
+        super(name)
+        this.age = age
+    }
+}
+
+let child = new Child('joe',9)
+console.log(child.name)
