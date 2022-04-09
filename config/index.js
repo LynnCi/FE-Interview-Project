@@ -6,11 +6,17 @@ const path = require('path')
 
 module.exports = {
   dev: {
-
-    // Paths
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',
-    proxyTable: {},
+    proxyTable: { //本地设置proxy代理
+      '/api':{
+        target:'http://www.admin.com/app',
+        changeOrigin:true,
+        pathRewrite:{  //api开头的请求会去到target下请求
+          '^/api':''   //替换 /api 为空字符
+        }
+      }
+    },
 
     // Various Dev Server settings
     host: 'localhost', // can be overwritten by process.env.HOST
