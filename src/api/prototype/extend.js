@@ -123,9 +123,9 @@ class Person{
         this.colors = ['red','green']
     }
 }
-class Child extends Person{
+class Child extends Person{ //通过extends关键字实现继承
     constructor(name,age){
-        super(name)
+        super(name) //子类必须在constructor方法中调用super方法，因子类没有this，需继承父类的this
         this.age = age
     }
 }
