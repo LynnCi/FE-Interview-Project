@@ -30,7 +30,6 @@
  * 缺点：某个实例修改了父类的属性或方法，会影响其他实例，其他实例也会改变。
  */
 
-/*
 function Father(){
     this.name = 'olvia',
     this.color = ['red','green']
@@ -46,7 +45,6 @@ child2.color.push('pink')
 console.log(child1.color,'child1') //[ 'red', 'green', 'pink' ]
 console.log(child2.color,'child2') //[ 'red', 'green', 'pink' ]
 
-*/
 
 
 /**
@@ -60,7 +58,7 @@ console.log(child2.color,'child2') //[ 'red', 'green', 'pink' ]
  *      2、无法实现父类构造函数的复用，每次都要重新调用。
  */
 
-/*
+
 function Father(){
     this.name = 'Joe';
     this.read = {book:'oneBook'}
@@ -78,7 +76,6 @@ child2.read.book = 'twoBook'
 console.log(child1.read.book,'child1.read') //oneBook
 console.log(child2.read.book,'child2.read') //twwoBook
 
-*/
 
 /**
  * 3、组合继承（es6 之前用） = 原型链继承 + 构造函数继承
@@ -92,7 +89,6 @@ console.log(child2.read.book,'child2.read') //twwoBook
  *      2、子类实例上的属性，同时存在于原型链上和子例身上，造成原型链污染。
  */
 
-/*
 function Father(name,age){
     this.name = name;
     this.age = age;
@@ -110,25 +106,38 @@ const child2 = new Child('leilei',19)
 
 console.log(child1.getInfo(),'child1.info') //hanmeimei 18
 console.log(child2.getInfo(),'child2.info') // leilei 19
-*/
+
 
 /**
  * es6 class继承
  * class在通过Babel转换成 es5 的时候，用的就是组合继承
+ * 核心：
+ * 1、extends关键字让子类继承父类函数
+ * 2、子类必须在constructor方法中调用super方法，因子类没有this，需继承父类的this；
+ * 3、super 用于访问和调用对象父类上的函数（构造函数、普通函数都可）
  */
 
-class Person{
-    constructor(name){
+class Father{
+    constructor(name,age){ //constructor 构造函数
         this.name = name;
-        this.colors = ['red','green']
+        this.age = age;
+    }
+    getInfo(){
+        console.log(this.name + this.age)
     }
 }
-class Child extends Person{ //通过extends关键字实现继承
+class Child extends Father{
     constructor(name,age){
-        super(name) //子类必须在constructor方法中调用super方法，因子类没有this，需继承父类的this
-        this.age = age
+        super(name,age)         //super调用父类的构造函数
     }
 }
+var child = new Child('Joe',9)
 
-let child = new Child('joe',9)
-console.log(child.name)
+// class Child extends Father{
+//     getInfo(name,age){
+//         super.getInfo(name,age) //super调用父类的普通函数
+//     }
+// }
+// var son = new Child();
+// son.getInfo('lilei',10)
+
