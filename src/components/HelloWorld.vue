@@ -1,12 +1,16 @@
 <template>
   <div>
     <h1>前端面试题总结</h1>
+    <router-link to="/css">css</router-link>
+    <!-- <ul>
+      <li @router.>css 部分</li>
+    </ul> -->
   </div>
 </template>
 
 <script>
-import '../api/jicheng'
-import '../api/test'
+// import '../api/jicheng'
+// import '../api/test'
 export default {
   name: 'HelloWorld',
   data () {
