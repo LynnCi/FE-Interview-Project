@@ -3,40 +3,42 @@
  * @param {*} url
  * @returns
  */
-function loadImg(url) {
-    let img = new Image()
-    img.src = url
-    return new Promise((resolve, reject) => { //返回promise对象
+ function loadImg(url) {
+    return new Promise((resolve,reject) => {
+        let img = new Image()
+        img.src = url
         img.onload = () => {
-            // console.log(url)
             resolve(img)
         }
-        img.onerror = (e) => {
-            reject(e)
+        img.onerror = (err) => {
+            reject(err)
         }
     })
 }
-
-let url1 = 'https://image-static.segmentfault.com/304/256/3042564477-624c431b82ce6_cover160'
-loadImg(url1).then((res) => {
-    document.body.append(res)
-
-})
+let imgAddress = 'https://image-static.segmentfault.com/304/256/3042564477-624c431b82ce6_cover160'
+imgload(imgAddress)
+    .then((res) => {
+        document.body.append(res)
+    })
+    .catch((err) => {
+        console.log(`图片加载失败，原因${err}`)
+    })
 
 
 /**
  * promise 按顺序加载多张图片
  */
- function loadAllImg(url) {
-    let img = new Image()
-    img.src = url
+
+ function loadImgAll(url) {
     return new Promise((resolve, reject) => { //返回promise对象
+        let img = new Image()
+        img.src = url
+
         img.onload = () => {
-            // console.log(url)
-            resolve(img) //注意填入img参数
+            resolve(img)
         }
-        img.onerror = (e) => {
-            reject(e)
+        img.onerror = (err) => {
+            reject(err)
         }
     })
 }
@@ -47,9 +49,8 @@ let imgArr = [
 'https://image-static.segmentfault.com/317/689/3176890972-62448cded247e_cover160']
 
 Promise.all(imgArr).then((result) => {
-    // console.log('result',result)
     result.forEach(item => {
-        loadAllImg(item).then(res => {
+        loadImgAll(item).then(res => {
             document.body.append(res)
         }).catch((e) => {
             console.log(e)
