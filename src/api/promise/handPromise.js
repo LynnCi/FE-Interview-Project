@@ -1,7 +1,6 @@
 /**
  * 手写promise
  */
-
 class myPromise{
     //构造函数
     constructor(handle){
@@ -18,16 +17,14 @@ class myPromise{
 
         //try catch 为了执行顺序
         try{
-            //bind 改变this指向
-            handle(this.resolve.bind(this),this.reject.bind(this))
+            handle(this.resolve.bind(this),this.reject.bind(this))//bind 改变this指向
         }catch(e){
             this.reject(e)
         }
         
     }
     resolve(val){
-        //状态不可逆
-        if(this.state === myPromise.PENDING){
+        if(this.state === myPromise.PENDING){ //状态不可逆
             this.state = myPromise.FUNFILLED
             this.value = val //执行成功的回调
             this.onFulfilledCallbacks.forEach((fn) => {
@@ -50,7 +47,6 @@ class myPromise{
             onFulfilled = function(value){
                 return value //不是func,重新返回值
             }
-
         }
         if(typeof onRejected !== 'function'){
             onRejected = function(reason){
@@ -58,11 +54,9 @@ class myPromise{
             }
         }
         if(this.state == myPromise.FUNFILLED){
-            //模拟异步
-            setTimeout(() => {
+            setTimeout(() => { //模拟异步
                 onFulfilled(this.value)
             })
-            
         }
         if(this.state == myPromise.REJECTED){
             setTimeout(() => {

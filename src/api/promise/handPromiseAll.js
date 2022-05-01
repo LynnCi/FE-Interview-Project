@@ -1,32 +1,48 @@
 /**
  * 手写promise.all
  */
-
 function all(arr){
-    return Promise((resolve,reject) => {
-        let length = arr.length //传入的promise个数
-        let count = 0 //传入fulfilled的promise个数
-        const result = []  //创建一个等长的数组，放置结果
+    //函数返回一个 promise 对象
+    return new Promise((resolve,reject) => {
+        let count = 0;
+        let result = [];
 
-        //如果传入的是空数组，返回一个fulfilled状态的promise
-        if(arr.length === 0){
-            return Promise.resolve(arr)
-        }
-
-        for(let i = 0;i < length;i++){
-            arr[i].then(res => {
-                //arr顺序和打印顺序一致
-                //result[i] = res
-                
-                result.push(res)  //将每次结果保存在result中
+        //并发执行每一个 promise
+        for(let i = 0;i < arr.length;i++){
+            //arr里有可能是promsie 或者 常量，用promise包装
+            Promise.resolve(arr[i]).then(res => {
+                //用下标存储结果，保证输出顺序和arr一致
+                //因为promise 对象执行时间可能不同，用push会破坏顺序
+                result[i] = res 
                 count++
-                //判断是否所有的promise 都进入 fulfilled 状态
-                if(count === length){
-                    resolve(result)  //返回结果
+                if(count === arr.length){
+                    resolve(result)
                 }
-            }).catch(err => {
-                reject(err)  //如果有错误，直接结束循环，并返回结果
-            })
+            }).catch(err => reject(err))
         }
     })
 }
+const p0 = 'p0'
+const p1 = new Promise((res, rej) => {
+    setTimeout(() => {
+        res('p1')
+    }, 1000)
+})
+
+const p2 = new Promise((res, rej) => {
+    setTimeout(() => {
+        res('p2')
+    }, 2000)
+})
+
+const p3 = new Promise((res, rej) => {
+    setTimeout(() => {
+        res('p3')
+    }, 3000)
+})
+
+const test = all([p0, p2, p3])
+    .then(res => console.log(res))
+    .catch(e => console.log(e))
+
+console.log(test);
