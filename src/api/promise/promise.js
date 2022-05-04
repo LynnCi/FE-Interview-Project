@@ -2,20 +2,23 @@
  *  promise主要用来解决这两个问题：
  1、解决回调地狱问题，通常第二个函数的参数是第一个函数的返回值；
  2、解决异步问题，但不能说promise是异步的；
+
+ 如果没有抛出异常，then/catch 返回的都是一个 resolve 状态的 Promise;
+ 抛出异常 返回的都是 rejected 的 Promise;
  */
 
  //new一个构造函数 p是返回的promise对象
 let p = new Promise((resolve,reject) => {
-    //这里做一些异步操作
-    setTimeout(()=>{
+    setTimeout(()=>{ //setTimeout 模拟异步
         resolve() //异步成功后执行
-    },500) //0.5s
-    reject()//异步失败后执行的回调函数
+    },1000) //1s
+    reject() //异步失败后执行的回调函数
 })
+
 //promise的精髓是状态维护和传递，then链式操作
 p.then((data) => {
     console.log(data)
-}).then((data2) => {
+}).then((data2) => { //p.then 返回 Promise 对象，data2 为返回的结果
     console.log(data2)
 }).then((data3) => {
     console.log(data3)
