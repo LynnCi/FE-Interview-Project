@@ -1,3 +1,5 @@
+//promise内部return，相当于返回新的promise
+
 Promise.resolve(1) //promise.resolve 把当前的promise 状态改为成功，并传值1
   .then((res) => {
     console.log(res) //res为1

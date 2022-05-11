@@ -1,3 +1,5 @@
+//promise.then 可以调用多次
+
 let p = new Promise((resolve, reject) => {
     setTimeout(() => {
       console.log('once') //1 once

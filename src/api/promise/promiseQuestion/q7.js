@@ -1,3 +1,7 @@
+//promise 内部return 相当于返回新的promise
+//promise 状态不会二次更改
+//promise.then 可以连续执行
+ 
 
  Promise.resolve() //Promise.resolve() 已经是一个成功态的promise了
  .then(() => {
@@ -10,4 +14,4 @@
  .catch((err) => {
    console.log('catch: ', err) 
  })
- //
+ //then:  Error: error!!!
