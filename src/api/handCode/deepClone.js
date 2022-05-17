@@ -6,13 +6,10 @@ function deepClone(obj){
     let result;
     if(obj instanceof Array){
         result = []
-        console.log('is array')
     }else{
         result = {}
-        console.log('is object')
     }
     for(let key in obj){
-        console.log('key',key)
         if(obj.hasOwnProperty(key)){
             result[key] = deepClone(obj[key])
         }
