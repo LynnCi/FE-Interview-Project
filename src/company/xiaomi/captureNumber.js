@@ -3,7 +3,7 @@ function captureThreeNumber(str){
     let arr = str.split('')
     for(let i = 0;i < arr.length - 2;i++){
         if(Number(arr[i]) && Number(arr[i+1]) && Number(arr[i+2])){
-            return str.substr(i,3)
+            return str.substr(i,3) //substr 从位置i开始，读取3个值
         }
     }
     return false
