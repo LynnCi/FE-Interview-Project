@@ -37,7 +37,7 @@ function flatten(arr){
 function flatten(arr){
   // reduce第一个参数返回累加的结果，第二个是当前遍历的值
   return arr.reduce((result,item) => {
-    return result.concat(Array.isArray(item) ? flat2(item) : item)
+    return result.concat(Array.isArray(item) ? flatten(item) : item)
   })
 }
 ```
