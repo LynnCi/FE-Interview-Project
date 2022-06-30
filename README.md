@@ -1,21 +1,49 @@
-# fe-interview-project
+# 前端面试题
 
-> A Vue.js project
+## 数组
 
-## Build Setup
+#### 1、数组去重
 
-``` bash
-# install dependencies
-npm install
-
-# serve with hot reload at localhost:8080
-npm run dev
-
-# build for production with minification
-npm run build
-
-# build for production and view the bundle analyzer report
-npm run build --report
+```
+function unique(array){
+  let map = new Map()
+  return array.filter((item) => !map.has(item) && map.set(item,1))
+}
 ```
 
-For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+```
+function unique(array){
+  return Array.from(new Set(array))
+}
+```
+
+#### 2、数组扁平化
+
+```
+function flatten(arr){
+  let res = []
+  for(let item of arr){
+    if(Array.isArray(item)){
+      res = res.concat(flatten(item))
+    }else{
+      res.push(item)
+    }
+  }
+  return res
+}
+```
+
+```
+function flatten(arr){
+  // reduce第一个参数返回累加的结果，第二个是当前遍历的值
+  return arr.reduce((result,item) => {
+    return result.concat(Array.isArray(item) ? flat2(item) : item)
+  })
+}
+```
+
+```
+//es6
+array.flat(Infinity) //Infinity 可展开多层
+[...array] //只能展开两层
+```
